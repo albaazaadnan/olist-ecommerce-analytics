@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olist E-Commerce Analytics — End-to-End Portfolio Project Guide</title>
+<style>
+  @page { size: A4; margin: 1.5mm; }
+  :root{
+    --green:#16834b;
+    --green-dark:#0c5d36;
+    --green-light:#eaf7ef;
+    --green-mid:#ccebd8;
+    --ink:#173027;
+    --muted:#60756b;
+    --line:#d9e7df;
+    --paper:#ffffff;
+    --bg:#f3f8f5;
+    --warning:#fff7df;
+    --warning-line:#e8c968;
+    --danger:#fff0ef;
+    --danger-line:#df8e86;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.42}
+  body{font-size:10.2pt}
+  .page{
+    width:210mm; min-height:297mm; margin:0 auto 8mm;
+    background:var(--paper); padding:13mm 13mm 14mm;
+    position:relative; overflow:hidden;
+    box-shadow:0 2px 12px rgba(16,64,43,.08);
+    page-break-after:always;
+  }
+  .page:last-child{page-break-after:auto}
+  .cover{display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#fff 0%,#f2faf5 100%)}
+  .eyebrow{font-size:8.5pt;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;color:var(--green)}
+  h1{font-size:31pt;line-height:1.03;margin:7mm 0 4mm;color:var(--green-dark)}
+  h2{font-size:19pt;margin:0 0 4mm;color:var(--green-dark)}
+  h3{font-size:12.5pt;margin:5mm 0 2mm;color:var(--green-dark)}
+  h4{font-size:10.5pt;margin:3mm 0 1.5mm}
+  p{margin:0 0 3mm}
+  ul,ol{margin:2mm 0 3mm 5mm;padding-left:4mm}
+  li{margin:1.2mm 0}
+  .subtitle{font-size:14pt;color:var(--muted);max-width:155mm}
+  .hero-box{border:1px solid var(--green-mid);background:var(--green-light);padding:5mm;border-radius:4mm;margin-top:9mm}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:8mm}
+  .meta div{padding:3mm;border:1px solid var(--line);border-radius:2.5mm}
+  .meta strong{display:block;color:var(--green-dark);font-size:9pt}
+  .meta span{font-size:10pt}
+  .footer{position:absolute;bottom:6mm;left:13mm;right:13mm;border-top:1px solid var(--line);padding-top:2mm;display:flex;justify-content:space-between;color:#789087;font-size:7.5pt}
+  .tag{display:inline-block;padding:1mm 2.5mm;border-radius:99px;background:var(--green-light);color:var(--green-dark);font-size:8pt;font-weight:700;margin:0 1mm 1mm 0}
+  .callout{padding:3.5mm 4mm;border-left:3px solid var(--green);background:#f5fbf7;margin:3mm 0;border-radius:0 2mm 2mm 0}
+  .warning{padding:3.5mm 4mm;border-left:3px solid var(--warning-line);background:var(--warning);margin:3mm 0}
+  .danger{padding:3.5mm 4mm;border-left:3px solid var(--danger-line);background:var(--danger);margin:3mm 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm}
+  .card{border:1px solid var(--line);border-radius:3mm;padding:3.5mm;background:#fff}
+  .card h3{margin-top:0}
+  table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:8.8pt}
+  th{background:var(--green);color:#fff;text-align:left;padding:2.2mm}
+  td{border:1px solid var(--line);padding:2mm;vertical-align:top}
+  tr:nth-child(even) td{background:#fbfdfc}
+  code,.code{font-family:"Courier New",monospace;font-size:8.3pt}
+  pre{background:#10251b;color:#e8f5ed;padding:4mm;border-radius:3mm;overflow:hidden;font-size:7.8pt;line-height:1.35;margin:3mm 0;white-space:pre-wrap}
+  .checklist{list-style:none;margin-left:0;padding-left:0}
+  .checklist li{padding-left:7mm;position:relative;margin:1.5mm 0}
+  .checklist li:before{content:"□";position:absolute;left:0;top:-.5mm;color:var(--green);font-size:12pt;font-weight:700}
+  .done li:before{content:"☑"}
+  .step{display:grid;grid-template-columns:10mm 1fr;gap:3mm;margin:3mm 0}
+  .num{width:8mm;height:8mm;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .flow{display:flex;align-items:center;justify-content:space-between;gap:2mm;margin:5mm 0}
+  .flow .box{flex:1;text-align:center;padding:3mm 2mm;border:1px solid var(--green-mid);background:var(--green-light);border-radius:2mm;font-size:8.5pt;font-weight:700}
+  .arrow{color:var(--green);font-size:14pt;font-weight:700}
+  .small{font-size:8.2pt;color:var(--muted)}
+  .kpi{font-size:17pt;font-weight:800;color:var(--green-dark);display:block}
+  .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}
+  .metric{border:1px solid var(--line);padding:3mm;border-radius:2.5mm}
+  .metric label{font-size:7.5pt;color:var(--muted);display:block}
+  .two-thirds{display:grid;grid-template-columns:2fr 1fr;gap:4mm}
+  .toc td:first-child{width:12mm;font-weight:700;color:var(--green)}
+  .quote{font-size:12pt;line-height:1.5;border-left:4px solid var(--green);padding-left:4mm;color:var(--green-dark);font-weight:600}
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div>
+    <div class="eyebrow">Portfolio Project Playbook • Data Analytics / BI</div>
+    <h1>Olist E-Commerce<br>Analytics</h1>
+    <p class="subtitle">A practical end-to-end guide for building a recruiter-ready portfolio project with Python, PostgreSQL, SQL and Power BI.</p>
+    <div class="hero-box">
+      <p class="quote">Raw business data → data discovery → quality checks → PostgreSQL → SQL analytics → Power BI semantic model → dashboard → insights → recommendations → GitHub.</p>
+    </div>
+    <div class="meta">
+      <div><strong>Dataset</strong><span>Brazilian E-Commerce Public Dataset by Olist</span></div>
+      <div><strong>Primary objective</strong><span>Demonstrate real-world data analyst / BI workflow</span></div>
+      <div><strong>Core tools</strong><span>Python • Pandas • PostgreSQL • SQL • Power BI • GitHub</span></div>
+      <div><strong>Target output</strong><span>One polished, explainable portfolio project</span></div>
+    </div>
+  </div>
+  <div>
+    <span class="tag">EDA</span><span class="tag">Data Quality</span><span class="tag">SQL</span><span class="tag">Data Modeling</span><span class="tag">Power BI</span><span class="tag">Business Insights</span>
+    <p class="small" style="margin-top:5mm">Use this guide as a working checklist. Do not skip directly to Power BI: the strength of this project is the complete pipeline.</p>
+  </div>
+  <div class="footer"><span>Olist E-Commerce Analytics Guide</span><span>01</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">01 • Project map</div>
+  <h2>What you are building</h2>
+  <p>The project should feel like a small real-world analytics engagement, not a Kaggle notebook. Your job is to transform raw e-commerce data into reliable business information and then explain what management should do with it.</p>
+  <div class="flow">
+    <div class="box">Olist CSVs</div><div class="arrow">→</div>
+    <div class="box">Python<br>Discovery + EDA</div><div class="arrow">→</div>
+    <div class="box">Clean / Validate</div><div class="arrow">→</div>
+    <div class="box">PostgreSQL</div><div class="arrow">→</div>
+    <div class="box">SQL Analysis</div>
+  </div>
+  <div class="flow">
+    <div class="box">Power BI<br>Model</div><div class="arrow">→</div>
+    <div class="box">Dashboard</div><div class="arrow">→</div>
+    <div class="box">Insights</div><div class="arrow">→</div>
+    <div class="box">Recommendations</div><div class="arrow">→</div>
+    <div class="box">GitHub</div>
+  </div>
+
+  <h3>Project success criteria</h3>
+  <div class="grid2">
+    <div class="card">
+      <h3>Technical</h3>
+      <ul class="checklist">
+        <li>Understand every source table and its grain.</li>
+        <li>Perform reproducible data profiling in Python.</li>
+        <li>Load validated data into PostgreSQL.</li>
+        <li>Use joins, CTEs, aggregations and window functions.</li>
+        <li>Build a clean analytical model in Power BI.</li>
+        <li>Create useful DAX measures rather than excessive calculated columns.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Business</h3>
+      <ul class="checklist">
+        <li>Define a clear management problem.</li>
+        <li>Answer questions, not just make charts.</li>
+        <li>Identify meaningful patterns and exceptions.</li>
+        <li>Quantify findings.</li>
+        <li>Translate findings into recommendations.</li>
+        <li>Document assumptions and limitations.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout"><strong>Portfolio rule:</strong> A recruiter should be able to understand what the project does, why it matters, how you built it, and what you discovered within a few minutes of opening your GitHub repository.</div>
+
+  <h3>Suggested business questions</h3>
+  <div class="grid3">
+    <div class="card"><strong>Sales</strong><p class="small">How is revenue changing over time? Which months/categories drive it?</p></div>
+    <div class="card"><strong>Products</strong><p class="small">Which products sell most, generate most revenue, and create weak performance?</p></div>
+    <div class="card"><strong>Customers</strong><p class="small">Who buys repeatedly? Which customers or segments have high value?</p></div>
+    <div class="card"><strong>Sellers</strong><p class="small">Which sellers contribute most? Are there quality or delivery differences?</p></div>
+    <div class="card"><strong>Operations</strong><p class="small">How long does delivery take? How does delivery relate to reviews?</p></div>
+    <div class="card"><strong>Geography</strong><p class="small">Which states/cities/regions perform best or have opportunities?</p></div>
+  </div>
+  <div class="footer"><span>Project map & objectives</span><span>02</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">02 • Setup</div>
+  <h2>Prepare your workspace</h2>
+  <p>Keep the project reproducible from the first day. Use a dedicated folder and a Git repository from the beginning.</p>
+
+  <h3>Recommended project structure</h3>
+  <pre>olist-ecommerce-analytics/
+├── README.md
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── reference/
+├── notebooks/
+│   ├── 01_data_discovery.ipynb
+│   ├── 02_eda.ipynb
+│   └── 03_validation.ipynb
+├── src/
+│   ├── load_data.py
+│   ├── clean_data.py
+│   └── validate_data.py
+├── sql/
+│   ├── 01_schema.sql
+│   ├── 02_quality_checks.sql
+│   ├── 03_views.sql
+│   └── 04_business_analysis.sql
+├── powerbi/
+│   └── olist_analytics.pbix
+├── screenshots/
+├── docs/
+└── requirements.txt</pre>
+
+  <h3>Tools</h3>
+  <div class="grid2">
+    <div class="card"><strong>Python</strong><p class="small">Use Pandas for profiling, cleaning, transformation and validation.</p></div>
+    <div class="card"><strong>PostgreSQL</strong><p class="small">Use it as the relational storage and SQL analysis layer.</p></div>
+    <div class="card"><strong>Power BI Desktop</strong><p class="small">Build the semantic model, DAX measures and interactive report.</p></div>
+    <div class="card"><strong>Git + GitHub</strong><p class="small">Track work and publish the final project professionally.</p></div>
+  </div>
+
+  <h3>Before downloading</h3>
+  <ul class="checklist">
+    <li>Create the GitHub repository.</li>
+    <li>Create the folder structure.</li>
+    <li>Create a Python virtual environment.</li>
+    <li>Install Pandas, NumPy, Matplotlib and a PostgreSQL connector/SQLAlchemy.</li>
+    <li>Confirm PostgreSQL and pgAdmin/your preferred SQL client work.</li>
+    <li>Confirm Power BI Desktop is installed.</li>
+    <li>Add a <span class="code">.gitignore</span> before committing files.</li>
+  </ul>
+
+  <div class="warning"><strong>Do not commit:</strong> huge raw files, passwords, database credentials, local paths, temporary files, or personal information. Keep the repository clean.</div>
+
+  <h3>First commit</h3>
+  <pre>git init
+git add .
+git commit -m "Initialize Olist analytics project"
+git branch -M main
+git remote add origin &lt;your-repository-url&gt;
+git push -u origin main</pre>
+
+  <div class="footer"><span>Workspace and reproducibility</span><span>03</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">03 • Source data</div>
+  <h2>Download and understand Olist</h2>
+  <p>Use the original Olist Brazilian E-Commerce Public Dataset. Keep the downloaded CSV files unchanged in <span class="code">data/raw/</span>.</p>
+
+  <h3>Typical source tables</h3>
+  <table>
+    <tr><th>Table</th><th>What one row represents</th><th>Why it matters</th></tr>
+    <tr><td>customers</td><td>A customer/order-linked customer record</td><td>Customer geography and customer-level analysis</td></tr>
+    <tr><td>orders</td><td>One order</td><td>Order lifecycle, dates, status and delivery</td></tr>
+    <tr><td>order_items</td><td>One product line within an order</td><td>Revenue, quantity, price and seller analysis</td></tr>
+    <tr><td>order_payments</td><td>A payment record for an order</td><td>Payment behavior and payment values</td></tr>
+    <tr><td>order_reviews</td><td>Review-related record</td><td>Customer satisfaction analysis</td></tr>
+    <tr><td>products</td><td>A product</td><td>Category, dimensions and product attributes</td></tr>
+    <tr><td>sellers</td><td>A seller</td><td>Seller performance and geography</td></tr>
+    <tr><td>geolocation</td><td>Postal-code-prefix geography record</td><td>Geographic enrichment</td></tr>
+    <tr><td>category translation</td><td>Category translation mapping</td><td>Readable product category names</td></tr>
+  </table>
+
+  <h3>Your first task: build a data dictionary</h3>
+  <p>Create a spreadsheet or Markdown table documenting every field you intend to use.</p>
+  <table>
+    <tr><th>Column</th><th>Type</th><th>Meaning</th><th>Grain</th><th>Key?</th></tr>
+    <tr><td>order_id</td><td>text</td><td>Unique order identifier</td><td>Order</td><td>PK / FK</td></tr>
+    <tr><td>customer_id</td><td>text</td><td>Customer identifier</td><td>Customer/order</td><td>FK</td></tr>
+    <tr><td>order_purchase_timestamp</td><td>datetime</td><td>Order purchase time</td><td>Order</td><td>No</td></tr>
+    <tr><td>price</td><td>numeric</td><td>Item price</td><td>Order item</td><td>No</td></tr>
+  </table>
+
+  <div class="callout"><strong>Critical concept — grain:</strong> Always ask “what does one row represent?” before aggregating. Mixing order-level and order-item-level rows incorrectly can inflate revenue.</div>
+
+  <h3>Source-data checklist</h3>
+  <ul class="checklist">
+    <li>Original CSVs stored untouched in <span class="code">data/raw/</span>.</li>
+    <li>File names recorded.</li>
+    <li>Row counts recorded.</li>
+    <li>Column names recorded.</li>
+    <li>Data dictionary started.</li>
+    <li>Candidate primary keys identified.</li>
+    <li>Candidate foreign keys identified.</li>
+    <li>Potential relationships sketched.</li>
+  </ul>
+
+  <div class="footer"><span>Source data and data dictionary</span><span>04</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">04 • Data discovery</div>
+  <h2>Profile every table before cleaning</h2>
+  <p>Do not immediately merge tables. First inspect each source independently. You are learning the structure of the business.</p>
+
+  <h3>For every table, answer these questions</h3>
+  <div class="grid2">
+    <div class="card">
+      <strong>Structure</strong>
+      <ul class="checklist">
+        <li>How many rows?</li>
+        <li>How many columns?</li>
+        <li>What are the data types?</li>
+        <li>What is the row grain?</li>
+        <li>What appears to be the primary key?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Quality</strong>
+      <ul class="checklist">
+        <li>How many nulls?</li>
+        <li>How many duplicates?</li>
+        <li>Are values outside expected ranges?</li>
+        <li>Are categories inconsistent?</li>
+        <li>Are dates valid?</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Starter profiling code</h3>
+  <pre>import pandas as pd
+
+df = pd.read_csv("data/raw/olist_orders_dataset.csv")
+
+print(df.shape)
+print(df.dtypes)
+print(df.head())
+print(df.isna().sum().sort_values(ascending=False))
+print("Duplicate rows:", df.duplicated().sum())
+print(df.nunique().sort_values())
+print(df.describe(include="all").T)</pre>
+
+  <h3>Create a profiling report</h3>
+  <table>
+    <tr><th>Table</th><th>Rows</th><th>Null-heavy fields</th><th>Duplicate concern</th><th>Key</th><th>Notes</th></tr>
+    <tr><td>orders</td><td>…</td><td>…</td><td>…</td><td>order_id</td><td>Order grain</td></tr>
+    <tr><td>order_items</td><td>…</td><td>…</td><td>…</td><td>order_id + item sequence</td><td>Line-item grain</td></tr>
+    <tr><td>products</td><td>…</td><td>…</td><td>…</td><td>product_id</td><td>Product grain</td></tr>
+  </table>
+
+  <h3>Relationship discovery</h3>
+  <p>Use unique counts and joins to test relationships rather than assuming them.</p>
+  <pre># Example: how many order IDs in order_items are missing from orders?
+missing_orders = (
+    set(order_items["order_id"].dropna())
+    - set(orders["order_id"].dropna())
+)
+print(len(missing_orders))</pre>
+
+  <div class="danger"><strong>Never “fix” an anomaly before understanding it.</strong> A duplicate row, null value or unusual quantity may be a legitimate business event. Investigate first; document the decision second.</div>
+
+  <div class="footer"><span>Table profiling and relationship discovery</span><span>05</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">05 • EDA</div>
+  <h2>Exploratory Data Analysis</h2>
+  <p>EDA is not a gallery of charts. Its purpose is to understand distributions, relationships, anomalies and business behavior before you build the analytical model.</p>
+
+  <h3>EDA sequence</h3>
+  <div class="step"><div class="num">1</div><div><strong>Univariate checks</strong><br><span class="small">Counts, distributions, missingness, unique values, date ranges and outliers.</span></div></div>
+  <div class="step"><div class="num">2</div><div><strong>Relationship checks</strong><br><span class="small">Orders ↔ items, orders ↔ customers, items ↔ products, items ↔ sellers.</span></div></div>
+  <div class="step"><div class="num">3</div><div><strong>Business EDA</strong><br><span class="small">Revenue trends, order volume, average order value, product/category performance, delivery and reviews.</span></div></div>
+  <div class="step"><div class="num">4</div><div><strong>Hypothesis generation</strong><br><span class="small">Write questions you want SQL/Power BI to answer rather than cherry-picking interesting charts.</span></div></div>
+
+  <h3>Core metrics to establish</h3>
+  <div class="metric-grid">
+    <div class="metric"><label>Total orders</label><span class="kpi">COUNT</span></div>
+    <div class="metric"><label>Items sold</label><span class="kpi">SUM</span></div>
+    <div class="metric"><label>Revenue</label><span class="kpi">SUM</span></div>
+    <div class="metric"><label>AOV</label><span class="kpi">AVG</span></div>
+  </div>
+
+  <h3>Revenue definition</h3>
+  <p>Choose a definition and use it consistently. A practical project metric is item value based on quantity × price. Be explicit about whether freight, payment totals, cancellations or other components are included.</p>
+
+  <pre>item_value = quantity * price</pre>
+
+  <h3>Useful EDA questions</h3>
+  <ul>
+    <li>How many orders are delivered, canceled or unavailable?</li>
+    <li>How long is the purchase-to-delivery period?</li>
+    <li>Which categories dominate sales?</li>
+    <li>Does high sales volume correspond to high revenue?</li>
+    <li>Which states generate the most orders?</li>
+    <li>Do lower review scores coincide with longer delivery times?</li>
+    <li>How concentrated is revenue among customers/products/sellers?</li>
+  </ul>
+
+  <div class="callout"><strong>EDA deliverable:</strong> finish this phase with a short “What I learned” section containing 5–10 observations and a list of data-quality issues that must be addressed.</div>
+
+  <div class="footer"><span>Exploratory analysis and metric definitions</span><span>06</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">06 • Data quality</div>
+  <h2>Clean deliberately and document every decision</h2>
+  <p>Do not aim for “zero nulls.” Aim for data that is fit for the business questions you are answering.</p>
+
+  <h3>Data-quality categories</h3>
+  <table>
+    <tr><th>Issue</th><th>Detection</th><th>Possible action</th><th>Document?</th></tr>
+    <tr><td>Missing values</td><td>isna()</td><td>Keep, impute, or exclude depending on use</td><td>Yes</td></tr>
+    <tr><td>Duplicates</td><td>duplicated()</td><td>Remove only confirmed duplicates</td><td>Yes</td></tr>
+    <tr><td>Invalid dates</td><td>to_datetime(errors="coerce")</td><td>Investigate or isolate</td><td>Yes</td></tr>
+    <tr><td>Invalid numeric values</td><td>Range rules</td><td>Investigate source/business logic</td><td>Yes</td></tr>
+    <tr><td>Inconsistent labels</td><td>value_counts()</td><td>Standardize categories</td><td>Yes</td></tr>
+    <tr><td>Broken relationships</td><td>anti-joins</td><td>Investigate orphan records</td><td>Yes</td></tr>
+  </table>
+
+  <h3>Recommended cleaning philosophy</h3>
+  <ol>
+    <li><strong>Preserve raw data.</strong> Never overwrite source files.</li>
+    <li><strong>Separate cleaning from analysis.</strong> Keep transformation code reproducible.</li>
+    <li><strong>Prefer business rules over arbitrary deletion.</strong></li>
+    <li><strong>Track row counts before and after transformations.</strong></li>
+    <li><strong>Validate totals.</strong> Cleaning should not silently change business metrics.</li>
+  </ol>
+
+  <h3>Optional portfolio enhancement: controlled messy-data exercise</h3>
+  <p>Because Olist is already a prepared public dataset, you can create a controlled “raw simulation” for a small portion of the project: introduce documented examples of formatting inconsistencies or duplicate records, then show how your pipeline detects and fixes them. Do not misrepresent these injected issues as original Olist problems.</p>
+
+  <h3>Cleaning checklist</h3>
+  <ul class="checklist">
+    <li>Dates parsed consistently.</li>
+    <li>Numeric columns have correct types.</li>
+    <li>Text values normalized where appropriate.</li>
+    <li>Confirmed duplicates handled.</li>
+    <li>Null-handling decisions documented.</li>
+    <li>Foreign-key integrity checked.</li>
+    <li>Unexpected values investigated.</li>
+    <li>Before/after row counts recorded.</li>
+    <li>Business totals reconciled.</li>
+  </ul>
+
+  <div class="warning"><strong>Do not fake complexity.</strong> Your project is already complex because the dataset is relational. Use injected issues only as a transparent learning exercise, not as fabricated evidence.</div>
+
+  <div class="footer"><span>Cleaning, validation and audit trail</span><span>07</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">07 • PostgreSQL</div>
+  <h2>Build the relational database layer</h2>
+  <p>Olist already arrives as multiple related tables. Your job is to load them correctly, preserve their grain, define keys, and make the database reliable for analysis.</p>
+
+  <h3>Recommended database layers</h3>
+  <div class="grid3">
+    <div class="card"><strong>Raw / staging</strong><p class="small">Tables close to the source data. Minimal transformation.</p></div>
+    <div class="card"><strong>Core</strong><p class="small">Validated relational tables with correct types and constraints.</p></div>
+    <div class="card"><strong>Analytics</strong><p class="small">Views or derived tables designed for business analysis.</p></div>
+  </div>
+
+  <h3>Conceptual relationship map</h3>
+  <pre>customers
+   │
+   └── orders
+         │
+         ├── order_items ─── products
+         │        │
+         │        └────────── sellers
+         │
+         ├── order_payments
+         │
+         └── order_reviews
+
+products ─── category translation
+customers / sellers ─── geography information</pre>
+
+  <h3>Example schema pattern</h3>
+  <pre>CREATE TABLE orders (
+    order_id TEXT PRIMARY KEY,
+    customer_id TEXT,
+    order_status TEXT,
+    order_purchase_timestamp TIMESTAMP,
+    order_approved_at TIMESTAMP,
+    order_delivered_carrier_date TIMESTAMP,
+    order_delivered_customer_date TIMESTAMP,
+    order_estimated_delivery_date TIMESTAMP
+);</pre>
+
+  <p class="small">Adapt exact data types and constraints after inspecting the source. Do not blindly copy a schema without understanding the fields.</p>
+
+  <h3>Loading sequence</h3>
+  <ol>
+    <li>Create database and schemas.</li>
+    <li>Create staging tables.</li>
+    <li>Load CSV data.</li>
+    <li>Validate row counts against source files.</li>
+    <li>Transform types / standardize data.</li>
+    <li>Populate core tables.</li>
+    <li>Add primary/foreign keys after confirming integrity.</li>
+    <li>Create analytical views.</li>
+  </ol>
+
+  <div class="callout"><strong>Key principle:</strong> PostgreSQL is where you demonstrate relational-data competence. Power BI should not be the first place where the business data becomes understandable.</div>
+
+  <div class="footer"><span>PostgreSQL architecture and loading</span><span>08</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">08 • SQL</div>
+  <h2>Turn the database into analysis</h2>
+  <p>Write SQL around business questions. Your SQL folder should tell the story of the analysis.</p>
+
+  <h3>SQL progression</h3>
+  <div class="grid2">
+    <div class="card">
+      <strong>Foundation</strong>
+      <ul>
+        <li>SELECT / WHERE</li>
+        <li>GROUP BY / HAVING</li>
+        <li>ORDER BY</li>
+        <li>CASE</li>
+        <li>JOINs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Portfolio-level</strong>
+      <ul>
+        <li>CTEs</li>
+        <li>Window functions</li>
+        <li>Date calculations</li>
+        <li>Percent contribution</li>
+        <li>Period-over-period growth</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Example: monthly revenue</h3>
+  <pre>SELECT
+    DATE_TRUNC('month', o.order_purchase_timestamp) AS month,
+    SUM(oi.price) AS revenue
+FROM orders o
+JOIN order_items oi
+  ON o.order_id = oi.order_id
+WHERE o.order_status = 'delivered'
+GROUP BY 1
+ORDER BY 1;</pre>
+
+  <h3>Example: product ranking</h3>
+  <pre>WITH product_sales AS (
+    SELECT
+        oi.product_id,
+        SUM(oi.price) AS revenue
+    FROM order_items oi
+    GROUP BY oi.product_id
+)
+SELECT
+    product_id,
+    revenue,
+    RANK() OVER (ORDER BY revenue DESC) AS revenue_rank
+FROM product_sales
+ORDER BY revenue_rank;</pre>
+
+  <h3>Business-analysis query checklist</h3>
+  <ul class="checklist">
+    <li>Monthly revenue and order trend.</li>
+    <li>Revenue by product category.</li>
+    <li>Top and bottom products by revenue.</li>
+    <li>Top sellers.</li>
+    <li>Revenue by customer location.</li>
+    <li>Average order value.</li>
+    <li>Orders per customer.</li>
+    <li>Repeat-customer rate.</li>
+    <li>Delivery duration.</li>
+    <li>Review score by delivery performance.</li>
+    <li>Year-over-year or month-over-month growth where the date range supports it.</li>
+  </ul>
+
+  <div class="callout"><strong>Interview target:</strong> Be able to explain at least one complex query line-by-line. It is better to understand 15 strong queries than to have 100 queries you cannot explain.</div>
+
+  <div class="footer"><span>SQL business analysis</span><span>09</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">09 • Analytical model</div>
+  <h2>Design the Power BI semantic model</h2>
+  <p>This is where your previous Power BI experience becomes useful. But now you are consuming a database that you deliberately designed and validated.</p>
+
+  <h3>Do not confuse the two models</h3>
+  <div class="grid2">
+    <div class="card">
+      <h3>PostgreSQL model</h3>
+      <p>Optimized for reliable relational storage, integrity and SQL analysis.</p>
+      <span class="tag">PK/FK</span><span class="tag">Constraints</span><span class="tag">Views</span>
+    </div>
+    <div class="card">
+      <h3>Power BI model</h3>
+      <p>Optimized for interactive analytical queries, measures and report performance.</p>
+      <span class="tag">Star schema</span><span class="tag">DAX</span><span class="tag">Relationships</span>
+    </div>
+  </div>
+
+  <h3>Target analytical shape</h3>
+  <pre>                 DimDate
+                    │
+                    │
+DimCustomer ─── FactOrderItems ─── DimProduct
+                    │
+                    │
+                DimSeller
+                    │
+                    │
+              DimGeography
+
+Supporting facts:
+• Order lifecycle
+• Payments
+• Reviews</pre>
+
+  <p>Do not force every Olist source table into one enormous Power BI model. Decide which facts and dimensions are necessary for your dashboard and keep the model understandable.</p>
+
+  <h3>Model checklist</h3>
+  <ul class="checklist">
+    <li>Identify fact-table grain explicitly.</li>
+    <li>Create a proper Date table.</li>
+    <li>Use one-to-many relationships where appropriate.</li>
+    <li>Avoid unnecessary many-to-many relationships.</li>
+    <li>Avoid ambiguous filter paths.</li>
+    <li>Hide technical key columns from report users where appropriate.</li>
+    <li>Create measures for core KPIs.</li>
+    <li>Format currencies, percentages and dates consistently.</li>
+    <li>Test totals against PostgreSQL queries.</li>
+  </ul>
+
+  <h3>Core DAX measures</h3>
+  <pre>Total Revenue = SUM(FactOrderItems[price])
+
+Orders = DISTINCTCOUNT(FactOrderItems[order_id])
+
+Items Sold = SUM(FactOrderItems[order_item_count])
+
+Average Order Value =
+DIVIDE([Total Revenue], [Orders])</pre>
+
+  <div class="footer"><span>Power BI semantic model</span><span>10</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">10 • Dashboard</div>
+  <h2>Build three focused report pages</h2>
+
+  <h3>Page 1 — Executive Overview</h3>
+  <div class="grid2">
+    <div class="card">
+      <strong>Top area</strong>
+      <p class="small">Revenue • Orders • Items • AOV • optional review KPI</p>
+    </div>
+    <div class="card">
+      <strong>Main visuals</strong>
+      <p class="small">Revenue trend • category performance • geographic performance • top products</p>
+    </div>
+  </div>
+
+  <h3>Page 2 — Product & Seller Performance</h3>
+  <ul>
+    <li>Revenue by category and subcategory.</li>
+    <li>Top products by revenue and quantity.</li>
+    <li>Seller performance table.</li>
+    <li>Revenue vs. order volume comparison.</li>
+    <li>Drill-through to product/seller detail if useful.</li>
+  </ul>
+
+  <h3>Page 3 — Customer, Delivery & Satisfaction</h3>
+  <ul>
+    <li>Customers and repeat-purchase metrics.</li>
+    <li>Orders/revenue by customer geography.</li>
+    <li>Delivery-time distribution.</li>
+    <li>Review score distribution.</li>
+    <li>Delivery duration vs. review score.</li>
+  </ul>
+
+  <h3>Visual design rules</h3>
+  <div class="grid3">
+    <div class="card"><strong>Hierarchy</strong><p class="small">Most important KPI and trend should be visually dominant.</p></div>
+    <div class="card"><strong>Consistency</strong><p class="small">Use the same units, date logic, labels and number formatting everywhere.</p></div>
+    <div class="card"><strong>Restraint</strong><p class="small">Avoid chart overload, excessive colors, 3D visuals and decorative clutter.</p></div>
+  </div>
+
+  <h3>Dashboard QA</h3>
+  <ul class="checklist">
+    <li>Every KPI reconciles to SQL.</li>
+    <li>Filters behave correctly.</li>
+    <li>Date slicer affects intended visuals.</li>
+    <li>No broken relationships.</li>
+    <li>Tooltips are useful.</li>
+    <li>Titles explain what the visual answers.</li>
+    <li>Numbers are readable at normal zoom.</li>
+    <li>Dashboard tells a story without verbal explanation.</li>
+  </ul>
+
+  <div class="callout"><strong>Rule:</strong> Every visual should answer a question. If you cannot state the question, remove the visual.</div>
+
+  <div class="footer"><span>Power BI report design</span><span>11</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">11 • Insights</div>
+  <h2>Turn charts into business findings</h2>
+  <p>The dashboard is not the final deliverable. The strongest part of the project is the reasoning you demonstrate after seeing the data.</p>
+
+  <h3>Weak vs. strong insight</h3>
+  <table>
+    <tr><th>Weak</th><th>Strong</th></tr>
+    <tr><td>“Electronics has the most sales.”</td><td>“Electronics contributes X% of revenue, but its average order value is below the portfolio average, suggesting an opportunity to increase basket size through bundles or cross-selling.”</td></tr>
+    <tr><td>“Some regions sell more.”</td><td>“Region A generates high order volume but lower value per order, indicating a potential upsell/cross-sell opportunity.”</td></tr>
+    <tr><td>“Reviews are lower when delivery is late.”</td><td>“Orders delivered materially later than expected have a lower average review score, suggesting delivery reliability is an important customer-experience lever.”</td></tr>
+  </table>
+
+  <h3>Insight formula</h3>
+  <div class="hero-box">
+    <strong>Observation → Evidence → Business meaning → Recommendation</strong>
+    <p class="small" style="margin-top:2mm">Never make the recommendation without showing the evidence that led to it.</p>
+  </div>
+
+  <h3>Find at least 5 strong insights</h3>
+  <ul class="checklist">
+    <li>One revenue/trend insight.</li>
+    <li>One product/category insight.</li>
+    <li>One customer insight.</li>
+    <li>One geographic or seller insight.</li>
+    <li>One operational/customer-satisfaction insight.</li>
+    <li>At least one “surprising” finding.</li>
+  </ul>
+
+  <h3>Quantify everything</h3>
+  <p>Instead of “a lot,” use percentages, amounts, rankings, growth rates, averages or differences.</p>
+
+  <pre>Finding:
+Top 10 products account for 31.4% of revenue.
+
+Meaning:
+Revenue is meaningfully concentrated among a small product group.
+
+Recommendation:
+Monitor availability and pricing of these products closely and
+develop complementary-product offers to protect revenue and
+increase basket size.</pre>
+
+  <div class="warning"><strong>Do not invent numbers.</strong> Fill in the actual values only after your analysis is complete.</div>
+
+  <div class="footer"><span>Business insights and recommendations</span><span>12</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">12 • Validation</div>
+  <h2>Prove that your numbers are trustworthy</h2>
+  <p>One of the easiest ways to impress an interviewer is to demonstrate that you checked your work.</p>
+
+  <h3>Three-layer reconciliation</h3>
+  <div class="flow">
+    <div class="box">Python<br>Clean data</div><div class="arrow">↔</div>
+    <div class="box">PostgreSQL<br>SQL totals</div><div class="arrow">↔</div>
+    <div class="box">Power BI<br>DAX totals</div>
+  </div>
+
+  <h3>Validation tests</h3>
+  <table>
+    <tr><th>Test</th><th>Expected result</th></tr>
+    <tr><td>Source vs staging row count</td><td>Matches unless documented filtering occurs</td></tr>
+    <tr><td>Core-table key uniqueness</td><td>No unexpected duplicates</td></tr>
+    <tr><td>Foreign-key integrity</td><td>No unexpected orphan records</td></tr>
+    <tr><td>Revenue Python vs SQL</td><td>Matches within documented rounding</td></tr>
+    <tr><td>Revenue SQL vs Power BI</td><td>Matches</td></tr>
+    <tr><td>Order count SQL vs Power BI</td><td>Matches</td></tr>
+    <tr><td>Date range</td><td>Same start/end dates across layers</td></tr>
+  </table>
+
+  <h3>Example SQL QA</h3>
+  <pre>-- Duplicate order IDs
+SELECT order_id, COUNT(*)
+FROM orders
+GROUP BY order_id
+HAVING COUNT(*) &gt; 1;
+
+-- Orphan order items
+SELECT COUNT(*)
+FROM order_items oi
+LEFT JOIN orders o
+  ON oi.order_id = o.order_id
+WHERE o.order_id IS NULL;</pre>
+
+  <h3>Final QA checklist</h3>
+  <ul class="checklist">
+    <li>All important totals reconcile.</li>
+    <li>Relationships have been tested.</li>
+    <li>Measures behave correctly under filters.</li>
+    <li>Null-handling decisions are documented.</li>
+    <li>Known limitations are written down.</li>
+    <li>SQL queries are reproducible.</li>
+    <li>Python notebooks run from top to bottom.</li>
+    <li>README instructions are sufficient for another person to understand the project.</li>
+  </ul>
+
+  <div class="callout"><strong>Interview-ready statement:</strong> “I reconciled the core KPIs across the Python, PostgreSQL and Power BI layers to make sure the dashboard wasn't producing numbers that differed from the analytical source.”</div>
+
+  <div class="footer"><span>Validation and data trust</span><span>13</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">13 • GitHub</div>
+  <h2>Package the project like a professional</h2>
+
+  <h3>README structure</h3>
+  <ol>
+    <li><strong>Project title + one-sentence description</strong></li>
+    <li><strong>Business problem</strong></li>
+    <li><strong>Dataset</strong> — source, tables and scope</li>
+    <li><strong>Tech stack</strong></li>
+    <li><strong>Architecture / pipeline</strong></li>
+    <li><strong>Data model</strong></li>
+    <li><strong>Data cleaning</strong></li>
+    <li><strong>SQL analysis</strong></li>
+    <li><strong>Power BI dashboard screenshots</strong></li>
+    <li><strong>Key findings</strong></li>
+    <li><strong>Recommendations</strong></li>
+    <li><strong>Limitations</strong></li>
+    <li><strong>How to reproduce</strong></li>
+  </ol>
+
+  <h3>What to show visually</h3>
+  <div class="grid2">
+    <div class="card"><strong>01 — Pipeline</strong><p class="small">A simple architecture diagram from CSV → Python → PostgreSQL → SQL → Power BI.</p></div>
+    <div class="card"><strong>02 — Data model</strong><p class="small">A clean relational/Power BI model diagram with the major tables.</p></div>
+    <div class="card"><strong>03 — Dashboard</strong><p class="small">Three high-quality screenshots with short explanations.</p></div>
+    <div class="card"><strong>04 — Findings</strong><p class="small">A compact list of quantified insights and recommendations.</p></div>
+  </div>
+
+  <h3>GitHub hygiene</h3>
+  <ul class="checklist">
+    <li>No unexplained files such as <span class="code">final_final_v3.ipynb</span>.</li>
+    <li>No credentials.</li>
+    <li>No unnecessary giant binaries.</li>
+    <li>Meaningful commit messages.</li>
+    <li>SQL scripts ordered logically.</li>
+    <li>Notebook names numbered by workflow.</li>
+    <li>README renders correctly.</li>
+    <li>Repository description is concise and professional.</li>
+  </ul>
+
+  <h3>Suggested repository description</h3>
+  <div class="hero-box">End-to-end e-commerce analytics project using Python, PostgreSQL, SQL and Power BI to analyze sales, customers, products, sellers, delivery and customer satisfaction.</div>
+
+  <div class="footer"><span>GitHub packaging and presentation</span><span>14</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">14 • Execution plan</div>
+  <h2>Work through the project in this order</h2>
+  <p>Use this page as your master checklist. Do not jump ahead just because a later tool is more exciting.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>Phase A — Discovery</h3>
+      <ul class="checklist">
+        <li>Download original Olist files.</li>
+        <li>Create project repository.</li>
+        <li>Inspect every table.</li>
+        <li>Determine grain and keys.</li>
+        <li>Map relationships.</li>
+        <li>Build data dictionary.</li>
+      </ul>
+
+      <h3>Phase B — EDA</h3>
+      <ul class="checklist">
+        <li>Profile missing values.</li>
+        <li>Check duplicates.</li>
+        <li>Inspect date ranges.</li>
+        <li>Check distributions and outliers.</li>
+        <li>Explore business metrics.</li>
+        <li>Write initial hypotheses.</li>
+      </ul>
+
+      <h3>Phase C — Cleaning</h3>
+      <ul class="checklist">
+        <li>Define quality rules.</li>
+        <li>Clean/transform reproducibly.</li>
+        <li>Validate relationships.</li>
+        <li>Record decisions.</li>
+        <li>Save processed outputs.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Phase D — PostgreSQL</h3>
+      <ul class="checklist">
+        <li>Create database.</li>
+        <li>Load staging tables.</li>
+        <li>Create core tables.</li>
+        <li>Validate keys.</li>
+        <li>Create analytical views.</li>
+      </ul>
+
+      <h3>Phase E — SQL</h3>
+      <ul class="checklist">
+        <li>Revenue and orders.</li>
+        <li>Products/categories.</li>
+        <li>Customers.</li>
+        <li>Sellers.</li>
+        <li>Geography.</li>
+        <li>Delivery/reviews.</li>
+        <li>Advanced SQL queries.</li>
+      </ul>
+
+      <h3>Phase F — Power BI</h3>
+      <ul class="checklist">
+        <li>Connect to PostgreSQL.</li>
+        <li>Build semantic model.</li>
+        <li>Create Date dimension.</li>
+        <li>Create core DAX measures.</li>
+        <li>Build three pages.</li>
+        <li>Perform visual QA.</li>
+      </ul>
+
+      <h3>Phase G — Finish</h3>
+      <ul class="checklist">
+        <li>Write 5–10 insights.</li>
+        <li>Write recommendations.</li>
+        <li>Validate numbers.</li>
+        <li>Complete README.</li>
+        <li>Add screenshots.</li>
+        <li>Publish and pin repository.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hero-box">
+    <strong>Recommended milestone rule:</strong> Do not move to the next phase until you can explain what you did in the current phase without reading your notes.
+  </div>
+
+  <div class="footer"><span>Master execution checklist</span><span>15</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">15 • Interview & polish</div>
+  <h2>Make the project interview-ready</h2>
+
+  <h3>Your 60–90 second project story</h3>
+  <pre>“I built an end-to-end e-commerce analytics project using the
+Olist dataset. I first profiled and validated the source tables
+with Python and Pandas, paying particular attention to table grain,
+missing values and relationships. I then loaded the validated data
+into PostgreSQL and used SQL to analyze revenue, products,
+customers, sellers, delivery and reviews. Finally, I built a Power BI
+semantic model and an interactive three-page dashboard. The main
+goal was not just reporting sales, but translating the analysis into
+business insights and recommendations. I also reconciled the
+important KPIs across the Python, SQL and Power BI layers.”</pre>
+
+  <h3>Questions you should be able to answer</h3>
+  <div class="grid2">
+    <div class="card">
+      <strong>Data</strong>
+      <ul>
+        <li>What is the grain of order_items?</li>
+        <li>Why did you keep the tables separate?</li>
+        <li>How did you handle nulls?</li>
+        <li>How did you validate relationships?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>SQL / BI</strong>
+      <ul>
+        <li>Why use PostgreSQL?</li>
+        <li>What does your CTE do?</li>
+        <li>Why use a window function?</li>
+        <li>Why is the fact table at that grain?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Business</strong>
+      <ul>
+        <li>What was the most important finding?</li>
+        <li>What recommendation would you prioritize?</li>
+        <li>What surprised you?</li>
+        <li>What would you analyze next?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Critical thinking</strong>
+      <ul>
+        <li>What are the dataset limitations?</li>
+        <li>What assumptions did you make?</li>
+        <li>What could make your conclusion wrong?</li>
+        <li>How would a company improve the analysis with more data?</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Final quality gate</h3>
+  <ul class="checklist">
+    <li>I understand every table I used.</li>
+    <li>I know the grain of every fact table.</li>
+    <li>I can explain every important relationship.</li>
+    <li>I can explain my cleaning decisions.</li>
+    <li>I can explain my main SQL queries.</li>
+    <li>I can explain my DAX measures.</li>
+    <li>I can defend every major dashboard visual.</li>
+    <li>I have at least five quantified findings.</li>
+    <li>I have business recommendations.</li>
+    <li>My GitHub repository is clean and reproducible.</li>
+  </ul>
+
+  <div class="callout"><strong>Final principle:</strong> The project is successful when you can defend the entire chain from raw row → transformation → metric → visualization → business decision.</div>
+
+  <div class="footer"><span>Interview readiness and final QA</span><span>16</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Appendix • Quick reference</div>
+  <h2>One-page project command center</h2>
+
+  <h3>Never lose the sequence</h3>
+  <div class="flow">
+    <div class="box">Discover</div><div class="arrow">→</div>
+    <div class="box">Profile</div><div class="arrow">→</div>
+    <div class="box">Clean</div><div class="arrow">→</div>
+    <div class="box">Validate</div><div class="arrow">→</div>
+    <div class="box">Model</div><div class="arrow">→</div>
+    <div class="box">Analyze</div>
+  </div>
+  <div class="flow">
+    <div class="box">Visualize</div><div class="arrow">→</div>
+    <div class="box">Interpret</div><div class="arrow">→</div>
+    <div class="box">Recommend</div><div class="arrow">→</div>
+    <div class="box">Document</div><div class="arrow">→</div>
+    <div class="box">Publish</div>
+  </div>
+
+  <h3>Core deliverables</h3>
+  <table>
+    <tr><th>Deliverable</th><th>Done?</th></tr>
+    <tr><td>Data dictionary</td><td>□</td></tr>
+    <tr><td>Data profiling notebook</td><td>□</td></tr>
+    <tr><td>EDA notebook</td><td>□</td></tr>
+    <tr><td>Cleaning/validation code</td><td>□</td></tr>
+    <tr><td>PostgreSQL schema</td><td>□</td></tr>
+    <tr><td>SQL business analysis</td><td>□</td></tr>
+    <tr><td>Power BI semantic model</td><td>□</td></tr>
+    <tr><td>Three-page dashboard</td><td>□</td></tr>
+    <tr><td>Five to ten quantified insights</td><td>□</td></tr>
+    <tr><td>Business recommendations</td><td>□</td></tr>
+    <tr><td>GitHub README</td><td>□</td></tr>
+    <tr><td>Interview story</td><td>□</td></tr>
+  </table>
+
+  <div class="hero-box">
+    <h3 style="margin-top:0">Your north star</h3>
+    <p><strong>Do not build a dashboard for the sake of having a dashboard.</strong></p>
+    <p>Build a reliable analytical pipeline that answers business questions and demonstrates that you understand data from source to decision.</p>
+  </div>
+
+  <h3>When stuck, ask yourself</h3>
+  <ol>
+    <li>What does one row represent?</li>
+    <li>What business question am I trying to answer?</li>
+    <li>Which table contains the correct grain for this question?</li>
+    <li>Could this join duplicate my rows?</li>
+    <li>Can I reconcile this number to another layer?</li>
+    <li>What does this result mean for the business?</li>
+  </ol>
+
+  <div class="footer"><span>Quick reference</span><span>17</span></div>
+</section>
+
+</body>
+</html>
