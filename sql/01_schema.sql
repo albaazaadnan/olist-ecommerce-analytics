@@ -4,6 +4,7 @@
 
 
 
+
 CREATE TABLE IF NOT EXISTS customers (
 	customer_id VARCHAR(32) PRIMARY KEY,
 	customer_unique_id VARCHAR(32) NOT NULL,
@@ -110,3 +111,25 @@ CREATE TABLE IF NOT EXISTS product_category_translation (
 	product_category_name VARCHAR(100) PRIMARY KEY,
 	product_category_name_english VARCHAR(100) NOT NULL
 );
+
+
+-- Issues while loading the data: 
+
+-- Some values were out of range for the "SMALLINT" data type.
+
+ALTER TABLE products 
+    ALTER COLUMN product_name_length TYPE INTEGER,
+    ALTER COLUMN product_description_length TYPE INTEGER,
+    ALTER COLUMN product_photos_qty TYPE INTEGER,
+	ALTER COLUMN product_weight_g TYPE INTEGER;
+
+-- There are different orders that share the same review so putting 
+-- review_id as a primary key alone will cause a problem
+-- we solved that by using a composite primary key.
+
+ALTER TABLE order_reviews
+	DROP CONSTRAINT order_reviews_pkey,
+	ADD CONSTRAINT order_reviews_pkey 
+		PRIMARY KEY (review_id, order_id);
+
+
