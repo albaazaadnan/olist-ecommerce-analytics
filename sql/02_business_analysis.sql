@@ -95,6 +95,43 @@ WHERE pct.product_category_name IS NULL
 
   
 -- 03. Customer Retention & Repeat Purchases
+
+SELECT 
+	customer_type,
+	n_customers,
+	ROUND((n_customers / SUM(n_customers) OVER() * 100.00),2) AS customer_rate
+FROM
+	(SELECT 
+		CASE WHEN n_orders = 1 THEN 'One Time'
+			 ELSE 'Repeat' END AS customer_type,
+		COUNT(customer_unique_id) AS n_customers
+	
+	FROM
+		(SELECT
+			customer_unique_id,
+			COUNT(order_id) as n_orders
+		
+		FROM customers as c
+		JOIN orders as o 
+			USING(customer_id)
+	
+		WHERE o.order_status = 'delivered'
+		GROUP BY customer_unique_id
+		) AS customer_orders
+		
+	GROUP BY customer_type
+	) AS customers_counts;
+
+
+-- This query returns the number and percentage of customers who made either
+-- one delivered purchase (One Time) or multiple delivered purchases (Repeat).
+-- Only 3% of customers made more than one purchase, indicating a very low
+-- repeat-purchase rate and a strong reliance on one-time customers.
+-- We recommend focusing on customer retention by using targeted email marketing
+-- and personalized offers to encourage existing customers to make another purchase.
+
+
+
 -- 04. Seller Revenue Performance
 -- 05. Delivery Performance by Region
 -- 06. Impact of Late Delivery on Customer Satisfaction
