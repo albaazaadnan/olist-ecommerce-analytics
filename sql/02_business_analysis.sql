@@ -133,7 +133,33 @@ FROM
 
 
 -- 04. Seller Revenue Performance
+
+SELECT 
+    seller_id,
+    SUM(price) AS total_revenue
+FROM order_items
+JOIN orders
+    USING(order_id)
+WHERE order_status = 'delivered'
+GROUP BY seller_id
+ORDER BY total_revenue DESC;
+
+
 -- 05. Delivery Performance by Region
+
+SELECT
+	customer_state,
+	avg(o.order_delivered_customer_date - o.order_purchase_ts) AS avg_delivery_time
+
+FROM orders as o
+JOIN customers as c
+	USING(customer_id)
+WHERE o.order_status = 'delivered'
+GROUP BY customer_state
+ORDER BY avg_delivery_time DESC;
+
+
+
 -- 06. Impact of Late Delivery on Customer Satisfaction
 -- 07. Product Category Satisfaction
 -- 08. Impact of Freight Cost on Customer Satisfaction
