@@ -1,4 +1,9 @@
 -- Schema design note:
+
+-- This file documents the schema design decisions and adjustments made during
+-- the EDA and data-loading process. It is intended to be read as a record of
+-- the design process rather than executed as a single script from top to bottom.
+--
 -- Data types, NULL constraints, primary keys, and foreign keys were chosen based on the
 -- Olist dataset's actual structure and findings from EDA, rather than arbitrary assumptions.
 
@@ -113,10 +118,12 @@ CREATE TABLE IF NOT EXISTS product_category_translation (
 );
 
 
--- Issues while loading the data: 
+-- ============================================================
+-- Adjustments Made During Data Loading
+-- ============================================================
 
--- Some values were out of range for the "SMALLINT" data type.
-
+-- Some values exceeded the range for the "SMALLINT" data type.
+-- The affected columns were changed to INTEGER.
 ALTER TABLE products 
     ALTER COLUMN product_name_length TYPE INTEGER,
     ALTER COLUMN product_description_length TYPE INTEGER,
@@ -125,7 +132,7 @@ ALTER TABLE products
 
 -- There are different orders that share the same review so putting 
 -- review_id as a primary key alone will cause a problem
--- we solved that by using a composite primary key.
+-- we solved that by using a composite primary key (review_id, order_id).
 
 ALTER TABLE order_reviews
 	DROP CONSTRAINT order_reviews_pkey,
